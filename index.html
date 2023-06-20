@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+   body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  text-align: center;
+}
+
+#timeCount {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+#current-time {
+  font-size: 48px;
+  color: #333;
+  font-weight: bold;
+}
+
+  </style>
+</head>
+<body>
+  <div>
+    <input type="text" id="timeCount" placeholder="Enter countdown value">
+    <div id="current-time"></div>
+  </div>
+
+  <script>
+    document.getElementById('timeCount').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        var countdownInput = parseInt(event.target.value, 10);
+        var countdownValue = Number.isInteger(countdownInput) ? Math.floor(countdownInput) : 0;
+        event.target.value = '';
+        startCountdown(countdownValue);
+      }
+    });
+
+    function startCountdown(countdown) {
+      var countdownElement = document.getElementById('current-time');
+      countdownElement.textContent = countdown;
+
+      var intervalId = setInterval(function() {
+        countdown--;
+        countdownElement.textContent = countdown;
+
+        if (countdown === 0) {
+          clearInterval(intervalId);
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
